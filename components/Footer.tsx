@@ -9,6 +9,7 @@ const products = [
   { name: "EL-POS", href: "/products#el-pos", description: "POS System" },
   { name: "EveY", href: "/evey", description: "Personal AI" },
   { name: "Extratzis", href: "https://extratzis.gr", description: "Job Platform" },
+  { name: "NextGenCalls", href: "https://nextgencalls.gr", description: "AI Call Agent" },
 ]
 
 const company = [

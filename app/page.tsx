@@ -420,6 +420,16 @@ export default function Home() {
               </div>
               <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-amber-400 transition-colors ms-4" />
             </a>
+            <a href="https://nextgencalls.gr" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-blue-500/30 hover:bg-white/[0.07] transition-all">
+              <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center">
+                <ExternalLink className="w-6 h-6 text-blue-400" />
+              </div>
+              <div>
+                <p className="text-white font-semibold group-hover:text-blue-400 transition-colors">NextGenCalls.gr</p>
+                <p className="text-white/50 text-sm">{t.portfolio.nextgencalls[lang]}</p>
+              </div>
+              <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-blue-400 transition-colors ms-4" />
+            </a>
           </motion.div>
         </div>
       </section>
