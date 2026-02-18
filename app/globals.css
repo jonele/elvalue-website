@@ -1,26 +1,522 @@
 @import "tailwindcss";
 
+/* ============================================
+   EL VALUE - Refined Luxury Tech Design System
+   Aesthetic: Sophisticated, Minimal, Dramatic
+   ============================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Deep Space Palette */
+  --void: #050508;
+  --abyss: #0a0a12;
+  --deep: #10101a;
+  --surface: #16161f;
+  --elevated: #1c1c28;
+
+  /* Glass System - More Refined */
+  --glass-bg: rgba(22, 22, 31, 0.75);
+  --glass-bg-elevated: rgba(28, 28, 40, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-border-hover: rgba(255, 255, 255, 0.12);
+  --glass-glow: rgba(255, 255, 255, 0.02);
+
+  /* Brand Colors - Refined */
+  --ella: #34d399;      /* Emerald - softer, more elegant */
+  --theo: #60a5fa;      /* Sky blue - approachable */
+  --accent: #a78bfa;    /* Violet - premium feel */
+  --gold: #fbbf24;      /* Amber - for highlights */
+
+  /* Text Hierarchy */
+  --text-hero: #ffffff;
+  --text-primary: rgba(255, 255, 255, 0.95);
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-subtle: rgba(255, 255, 255, 0.35);
+
+  /* Spacing System */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+  --space-5xl: 8rem;
+
+  --background: var(--void);
+  --foreground: var(--text-primary);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "DM Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-arabic: "Noto Sans Arabic", "Tajawal", system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ============================================
+   Base Styles
+   ============================================ */
+
+@layer base {
+  * {
+    box-sizing: border-box;
   }
 }
 
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
 body {
-  background: var(--background);
+  background: #020617;
+  min-height: 100vh;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  position: relative;
+}
+
+
+/* ============================================
+   Typography
+   ============================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.text-hero {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.text-display {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.text-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+}
+
+.text-body-lg {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.text-body {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.text-small {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.text-caption {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+/* ============================================
+   Gradient Text - More Refined
+   ============================================ */
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--ella) 0%, var(--theo) 50%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-ella {
+  background: linear-gradient(135deg, var(--ella), #10b981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-theo {
+  background: linear-gradient(135deg, var(--theo), #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   Glass Cards - Refined
+   ============================================ */
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    transparent 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.glass-card:hover {
+  border-color: var(--glass-border-hover);
+  transform: translateY(-4px);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 0 1px var(--glass-glow);
+}
+
+.glass-card-elevated {
+  background: var(--glass-bg-elevated);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* ============================================
+   Glow Effects - Refined
+   ============================================ */
+
+.glow-ella {
+  box-shadow:
+    0 0 60px rgba(52, 211, 153, 0.15),
+    0 0 120px rgba(52, 211, 153, 0.08),
+    inset 0 0 60px rgba(52, 211, 153, 0.03);
+  border-color: rgba(52, 211, 153, 0.2);
+}
+
+.glow-theo {
+  box-shadow:
+    0 0 60px rgba(96, 165, 250, 0.15),
+    0 0 120px rgba(96, 165, 250, 0.08),
+    inset 0 0 60px rgba(96, 165, 250, 0.03);
+  border-color: rgba(96, 165, 250, 0.2);
+}
+
+.glow-accent {
+  box-shadow:
+    0 0 60px rgba(167, 139, 250, 0.15),
+    0 0 120px rgba(167, 139, 250, 0.08),
+    inset 0 0 60px rgba(167, 139, 250, 0.03);
+  border-color: rgba(167, 139, 250, 0.2);
+}
+
+/* Subtle glow for hover states */
+.hover-glow-ella:hover {
+  box-shadow: 0 0 40px rgba(52, 211, 153, 0.2);
+}
+
+.hover-glow-theo:hover {
+  box-shadow: 0 0 40px rgba(96, 165, 250, 0.2);
+}
+
+/* ============================================
+   Buttons - Refined
+   ============================================ */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--void);
+  background: linear-gradient(135deg, var(--ella) 0%, #10b981 100%);
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent, rgba(255,255,255,0.2));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(52, 211, 153, 0.3);
+}
+
+.btn-primary:hover::before {
+  opacity: 1;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-secondary:hover {
+  border-color: var(--glass-border-hover);
+  background: var(--glass-bg);
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   Dividers & Separators
+   ============================================ */
+
+.divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--glass-border) 20%,
+    var(--glass-border) 80%,
+    transparent 100%
+  );
+}
+
+.divider-vertical {
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--glass-border) 20%,
+    var(--glass-border) 80%,
+    transparent 100%
+  );
+}
+
+/* ============================================
+   Scrollbar
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--abyss);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--elevated);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--surface);
+}
+
+/* ============================================
+   Selection
+   ============================================ */
+
+::selection {
+  background: var(--ella);
+  color: var(--void);
+}
+
+/* ============================================
+   Focus States
+   ============================================ */
+
+:focus-visible {
+  outline: 2px solid var(--ella);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* EveY Aurora Glow Button */
+.glow-btn {
+  position: relative;
+  box-shadow:
+    0 0 20px rgba(192, 38, 211, 0.4),
+    0 0 60px rgba(139, 92, 246, 0.2),
+    0 8px 32px rgba(192, 38, 211, 0.3);
+  animation: aurora-pulse 3s ease-in-out infinite;
+}
+
+.glow-btn:hover {
+  box-shadow:
+    0 0 30px rgba(192, 38, 211, 0.6),
+    0 0 80px rgba(139, 92, 246, 0.35),
+    0 12px 40px rgba(192, 38, 211, 0.4);
+}
+
+@keyframes aurora-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 20px rgba(192, 38, 211, 0.4),
+      0 0 60px rgba(139, 92, 246, 0.2),
+      0 8px 32px rgba(192, 38, 211, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 0 30px rgba(192, 38, 211, 0.55),
+      0 0 80px rgba(139, 92, 246, 0.3),
+      0 12px 40px rgba(192, 38, 211, 0.4);
+  }
+}
+
+/* Stagger animation delays */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+.container-narrow {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.container-wide {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+@media (min-width: 768px) {
+  .container-wide {
+    padding: 0 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-wide {
+    padding: 0 4rem;
+  }
+}
+
+.section-padding {
+  padding: var(--space-5xl) 0;
+}
+
+/* Hide scrollbar but keep functionality */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ============================================
+   RTL & Arabic Support
+   ============================================ */
+
+[dir="rtl"] {
+  font-family: "Noto Sans Arabic", "Tajawal", system-ui, sans-serif;
+}
+
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4,
+[dir="rtl"] h5,
+[dir="rtl"] h6 {
+  font-family: "Tajawal", "Noto Sans Arabic", system-ui, sans-serif;
+  letter-spacing: 0;
+}
+
+.font-arabic {
+  font-family: "Noto Sans Arabic", "Tajawal", system-ui, sans-serif;
+}
+
+/* RTL-specific adjustments */
+[dir="rtl"] .glass-card {
+  text-align: right;
+}
+
+[dir="rtl"] .btn-primary,
+[dir="rtl"] .btn-secondary {
+  flex-direction: row-reverse;
 }

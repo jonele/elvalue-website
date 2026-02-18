@@ -1,0 +1,181 @@
+"use client"
+
+import { useEffect, useRef } from "react"
+
+interface Particle {
+  x: number
+  y: number
+  vx: number
+  vy: number
+  size: number
+  opacity: number
+  color: string
+}
+
+export function AnimatedBackground() {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const ctx = canvas.getContext("2d")
+    if (!ctx) return
+
+    let animationId: number
+    let particles: Particle[] = []
+
+    const colors = [
+      "rgba(52, 211, 153, 0.6)",  // ella
+      "rgba(96, 165, 250, 0.6)",  // theo
+      "rgba(167, 139, 250, 0.4)", // accent
+    ]
+
+    const resize = () => {
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+    }
+
+    const createParticles = () => {
+      particles = []
+      const particleCount = Math.floor((canvas.width * canvas.height) / 15000)
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
+          size: Math.random() * 2 + 0.5,
+          opacity: Math.random() * 0.5 + 0.2,
+          color: colors[Math.floor(Math.random() * colors.length)],
+        })
+      }
+    }
+
+    const drawParticle = (particle: Particle) => {
+      ctx.beginPath()
+      ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
+      ctx.fillStyle = particle.color.replace("0.6", String(particle.opacity))
+      ctx.fill()
+    }
+
+    const connectParticles = () => {
+      const maxDistance = 120
+
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x
+          const dy = particles[i].y - particles[j].y
+          const distance = Math.sqrt(dx * dx + dy * dy)
+
+          if (distance < maxDistance) {
+            const opacity = (1 - distance / maxDistance) * 0.15
+            ctx.beginPath()
+            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`
+            ctx.lineWidth = 0.5
+            ctx.moveTo(particles[i].x, particles[i].y)
+            ctx.lineTo(particles[j].x, particles[j].y)
+            ctx.stroke()
+          }
+        }
+      }
+    }
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+      particles.forEach((particle) => {
+        particle.x += particle.vx
+        particle.y += particle.vy
+
+        // Wrap around edges
+        if (particle.x < 0) particle.x = canvas.width
+        if (particle.x > canvas.width) particle.x = 0
+        if (particle.y < 0) particle.y = canvas.height
+        if (particle.y > canvas.height) particle.y = 0
+
+        // Subtle pulsing
+        particle.opacity = 0.3 + Math.sin(Date.now() * 0.001 + particle.x) * 0.2
+
+        drawParticle(particle)
+      })
+
+      connectParticles()
+      animationId = requestAnimationFrame(animate)
+    }
+
+    resize()
+    createParticles()
+    animate()
+
+    window.addEventListener("resize", () => {
+      resize()
+      createParticles()
+    })
+
+    return () => {
+      cancelAnimationFrame(animationId)
+      window.removeEventListener("resize", resize)
+    }
+  }, [])
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 pointer-events-none z-0"
+      style={{ opacity: 0.4 }}
+    />
+  )
+}
+
+// Floating orbs for section backgrounds
+export function FloatingOrbs() {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div
+        className="absolute w-[600px] h-[600px] rounded-full animate-float"
+        style={{
+          background: "radial-gradient(circle, rgba(52, 211, 153, 0.1) 0%, transparent 70%)",
+          top: "-200px",
+          left: "-100px",
+          filter: "blur(60px)",
+        }}
+      />
+      <div
+        className="absolute w-[500px] h-[500px] rounded-full animate-float stagger-2"
+        style={{
+          background: "radial-gradient(circle, rgba(96, 165, 250, 0.1) 0%, transparent 70%)",
+          bottom: "-150px",
+          right: "-100px",
+          filter: "blur(60px)",
+        }}
+      />
+      <div
+        className="absolute w-[400px] h-[400px] rounded-full animate-float stagger-3"
+        style={{
+          background: "radial-gradient(circle, rgba(167, 139, 250, 0.08) 0%, transparent 70%)",
+          top: "40%",
+          left: "30%",
+          filter: "blur(80px)",
+        }}
+      />
+    </div>
+  )
+}
+
+// Grid pattern overlay
+export function GridPattern() {
+  return (
+    <div
+      className="absolute inset-0 pointer-events-none opacity-[0.03]"
+      style={{
+        backgroundImage: `
+          linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+        `,
+        backgroundSize: "60px 60px",
+      }}
+    />
+  )
+}
