@@ -4,6 +4,7 @@ import { Hero } from "@/components/Hero"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
+import { useState, useEffect } from "react"
 import {
   ArrowRight,
   ArrowUpRight,
@@ -27,11 +28,11 @@ import {
   Zap,
   ExternalLink,
 } from "lucide-react"
+import { t, LANG_LABELS, type Lang } from "./translations-home"
 
 const VIVA_URL =
   "https://www.viva.com/el-gr/onboarding?utm_source=partners&utm_medium=isv&utm_campaign=grelvalue01212025&utm_content=aml_soft____&rep=true"
 
-// Simple fade-in animation
 const fadeIn = {
   initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
@@ -39,7 +40,26 @@ const fadeIn = {
   transition: { duration: 0.8 },
 }
 
-// Feature mini-card component
+function LanguageToggle({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
+  return (
+    <div className="fixed top-24 right-4 sm:right-6 z-40 flex gap-1 p-1 rounded-xl bg-white/5 backdrop-blur-md border border-white/10">
+      {(Object.keys(LANG_LABELS) as Lang[]).map((l) => (
+        <button
+          key={l}
+          onClick={() => setLang(l)}
+          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+            lang === l
+              ? "bg-emerald-500 text-slate-900"
+              : "text-white/60 hover:text-white hover:bg-white/10"
+          }`}
+        >
+          {LANG_LABELS[l]}
+        </button>
+      ))}
+    </div>
+  )
+}
+
 function FeatureCard({
   icon: Icon,
   title,
@@ -68,29 +88,43 @@ function FeatureCard({
 }
 
 export default function Home() {
-  return (
-    <>
-      <Hero />
+  const [lang, setLang] = useState<Lang>("en")
 
-      {/* Meet Our AI Section - Ella & Theo */}
+  useEffect(() => {
+    const saved = localStorage.getItem("elvalue-lang") as Lang | null
+    if (saved && saved in LANG_LABELS) setLang(saved)
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem("elvalue-lang", lang)
+  }, [lang])
+
+  const isRtl = lang === "ar"
+
+  return (
+    <div dir={isRtl ? "rtl" : "ltr"} className={isRtl ? "font-arabic" : ""}>
+      <Hero />
+      <LanguageToggle lang={lang} setLang={setLang} />
+
+      {/* AI Team */}
       <section className="py-32 md:py-40 px-8 md:px-16 lg:px-24 bg-slate-950">
         <div className="max-w-6xl mx-auto">
           <motion.div {...fadeIn} className="text-center mb-20">
             <p className="text-emerald-400 text-sm font-medium tracking-widest uppercase mb-4">
-              Meet Our AI Team
+              {t.aiTeam.badge[lang]}
             </p>
             <h2 className="text-3xl md:text-5xl font-semibold text-white mb-6">
-              Intelligence That Works For You
+              {t.aiTeam.title[lang]}
             </h2>
             <p className="text-white/60 text-lg max-w-2xl mx-auto">
-              Two AI assistants, each specialized for different aspects of your business.
+              {t.aiTeam.subtitle[lang]}
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8 md:gap-12">
             {/* Ella */}
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
+              initial={{ opacity: 0, x: isRtl ? 30 : -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
@@ -98,24 +132,14 @@ export default function Home() {
             >
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-emerald-500/30">
-                  <Image
-                    src="/images/ella_avatar.png"
-                    alt="Ella"
-                    width={64}
-                    height={64}
-                    className="w-full h-full object-cover"
-                  />
+                  <Image src="/images/ella_avatar.png" alt="Ella" width={64} height={64} className="w-full h-full object-cover" />
                 </div>
                 <div>
                   <h3 className="text-2xl font-semibold text-white">Ella</h3>
-                  <p className="text-emerald-400 text-sm">Customer Experience AI</p>
+                  <p className="text-emerald-400 text-sm">{t.ella.role[lang]}</p>
                 </div>
               </div>
-              <p className="text-white/70 leading-relaxed mb-6">
-                Your customers&apos; personal concierge. Ella remembers preferences,
-                suggests personalized offers, handles loyalty rewards, and provides
-                24/7 support in Greek, English, and Arabic.
-              </p>
+              <p className="text-white/70 leading-relaxed mb-6">{t.ella.desc[lang]}</p>
               <div className="flex flex-wrap gap-2">
                 <span className="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs">EL-Loyal</span>
                 <span className="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs">RSRV</span>
@@ -124,7 +148,7 @@ export default function Home() {
 
             {/* Theo */}
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
+              initial={{ opacity: 0, x: isRtl ? -30 : 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
@@ -132,24 +156,14 @@ export default function Home() {
             >
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-blue-500/30">
-                  <Image
-                    src="/images/theo_avatar_v2.jpg"
-                    alt="Theo"
-                    width={64}
-                    height={64}
-                    className="w-full h-full object-cover"
-                  />
+                  <Image src="/images/theo_avatar_v2.jpg" alt="Theo" width={64} height={64} className="w-full h-full object-cover" />
                 </div>
                 <div>
                   <h3 className="text-2xl font-semibold text-white">Theo</h3>
-                  <p className="text-blue-400 text-sm">Operations AI</p>
+                  <p className="text-blue-400 text-sm">{t.theo.role[lang]}</p>
                 </div>
               </div>
-              <p className="text-white/70 leading-relaxed mb-6">
-                Intelligence for managers and owners. Theo handles analytics,
-                forecasting, inventory insights, and B2B operations. Your data,
-                transformed into actionable decisions.
-              </p>
+              <p className="text-white/70 leading-relaxed mb-6">{t.theo.desc[lang]}</p>
               <div className="flex flex-wrap gap-2">
                 <span className="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs">EL-OS</span>
                 <span className="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs">EL-POS</span>
@@ -165,46 +179,35 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
             <motion.div {...fadeIn}>
               <p className="text-emerald-400 text-sm font-medium tracking-widest uppercase mb-4">
-                EL-Loyal
+                {t.elLoyal.badge[lang]}
               </p>
               <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6">
-                Loyalty That Actually Works
+                {t.elLoyal.title[lang]}
               </h2>
               <p className="text-white/60 text-lg leading-relaxed mb-8">
-                Forget punch cards. EL-Loyal gamifies the customer experience with
-                points, tiers, challenges, and rewards. Ella makes every customer
-                feel like a VIP.
+                {t.elLoyal.desc[lang]}
               </p>
               <div className="grid grid-cols-2 gap-4 mb-8">
                 <div className="p-4 rounded-xl bg-white/5 border border-white/10">
                   <p className="text-2xl font-bold text-emerald-400">47%</p>
-                  <p className="text-white/50 text-sm">Higher return rate</p>
+                  <p className="text-white/50 text-sm">{t.elLoyal.stat1[lang]}</p>
                 </div>
                 <div className="p-4 rounded-xl bg-white/5 border border-white/10">
                   <p className="text-2xl font-bold text-emerald-400">+€12</p>
-                  <p className="text-white/50 text-sm">Avg. ticket increase</p>
+                  <p className="text-white/50 text-sm">{t.elLoyal.stat2[lang]}</p>
                 </div>
               </div>
-              <Link
-                href="https://el-loyal.com"
-                target="_blank"
-                className="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 font-medium transition-colors"
-              >
-                Visit EL-Loyal
+              <Link href="https://el-loyal.com" target="_blank" className="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 font-medium transition-colors">
+                {t.elLoyal.cta[lang]}
                 <ArrowUpRight size={18} />
               </Link>
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
               <div className="grid grid-cols-2 gap-3">
-                <FeatureCard icon={Star} title="Points & Tiers" desc="Reward loyal customers with levels and exclusive perks" color="emerald" />
-                <FeatureCard icon={MessageCircle} title="AI Concierge" desc="Ella greets, recommends, and handles rewards automatically" color="emerald" />
-                <FeatureCard icon={Trophy} title="Gamified Challenges" desc="Weekly challenges that drive repeat visits and engagement" color="emerald" />
-                <FeatureCard icon={Globe} title="Multi-language" desc="Full support in Greek, English, and Arabic" color="emerald" />
+                <FeatureCard icon={Star} title={t.elLoyal.features.pointsTiers.title[lang]} desc={t.elLoyal.features.pointsTiers.desc[lang]} color="emerald" />
+                <FeatureCard icon={MessageCircle} title={t.elLoyal.features.aiConcierge.title[lang]} desc={t.elLoyal.features.aiConcierge.desc[lang]} color="emerald" />
+                <FeatureCard icon={Trophy} title={t.elLoyal.features.challenges.title[lang]} desc={t.elLoyal.features.challenges.desc[lang]} color="emerald" />
+                <FeatureCard icon={Globe} title={t.elLoyal.features.multiLang.title[lang]} desc={t.elLoyal.features.multiLang.desc[lang]} color="emerald" />
               </div>
             </motion.div>
           </div>
@@ -215,46 +218,34 @@ export default function Home() {
       <section className="py-32 md:py-40 px-8 md:px-16 lg:px-24 bg-slate-950">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="order-2 lg:order-1"
-            >
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="order-2 lg:order-1">
               <div className="grid grid-cols-2 gap-3">
-                <FeatureCard icon={Calendar} title="Online Booking" desc="Embeddable widget for your website and social media" color="blue" />
-                <FeatureCard icon={LayoutGrid} title="Table Management" desc="Real-time floor plan with smart seat optimization" color="blue" />
-                <FeatureCard icon={Smartphone} title="WhatsApp Alerts" desc="Automatic confirmations and reminders via WhatsApp" color="blue" />
-                <FeatureCard icon={BarChart3} title="No-show Analytics" desc="Track patterns and reduce cancellations with data" color="blue" />
+                <FeatureCard icon={Calendar} title={t.rsrv.featureCards.booking.title[lang]} desc={t.rsrv.featureCards.booking.desc[lang]} color="blue" />
+                <FeatureCard icon={LayoutGrid} title={t.rsrv.featureCards.tables.title[lang]} desc={t.rsrv.featureCards.tables.desc[lang]} color="blue" />
+                <FeatureCard icon={Smartphone} title={t.rsrv.featureCards.whatsapp.title[lang]} desc={t.rsrv.featureCards.whatsapp.desc[lang]} color="blue" />
+                <FeatureCard icon={BarChart3} title={t.rsrv.featureCards.analytics.title[lang]} desc={t.rsrv.featureCards.analytics.desc[lang]} color="blue" />
               </div>
             </motion.div>
             <motion.div {...fadeIn} className="order-1 lg:order-2">
               <p className="text-blue-400 text-sm font-medium tracking-widest uppercase mb-4">
-                RSRV
+                {t.rsrv.badge[lang]}
               </p>
               <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6">
-                Reservations, Reimagined
+                {t.rsrv.title[lang]}
               </h2>
               <p className="text-white/60 text-lg leading-relaxed mb-8">
-                Manage your tables like a seasoned maitre d&apos;. Real-time availability,
-                smart overbooking prevention, WhatsApp confirmations, and seamless
-                guest communication.
+                {t.rsrv.desc[lang]}
               </p>
               <ul className="space-y-3 mb-8">
-                {["Online booking widget", "Table management", "WhatsApp & SMS notifications", "No-show tracking"].map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-white/70">
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
-                    {item}
+                {t.rsrv.features.map((item) => (
+                  <li key={item.en} className="flex items-center gap-3 text-white/70">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0" />
+                    {item[lang]}
                   </li>
                 ))}
               </ul>
-              <Link
-                href="https://el-rsrv.com"
-                target="_blank"
-                className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-medium transition-colors"
-              >
-                Visit RSRV
+              <Link href="https://el-rsrv.com" target="_blank" className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-medium transition-colors">
+                {t.rsrv.cta[lang]}
                 <ArrowUpRight size={18} />
               </Link>
             </motion.div>
@@ -268,179 +259,138 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
             <motion.div {...fadeIn}>
               <p className="text-violet-400 text-sm font-medium tracking-widest uppercase mb-4">
-                EL-OS
+                {t.elOs.badge[lang]}
               </p>
               <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6">
-                Your B2B Command Center
+                {t.elOs.title[lang]}
               </h2>
               <p className="text-white/60 text-lg leading-relaxed mb-8">
-                Wholesale ordering, vendor management, ERP integration, and fiscal
-                reports. Everything backend, unified in one intelligent dashboard.
+                {t.elOs.desc[lang]}
               </p>
               <ul className="space-y-3 mb-8">
-                {["Vendor & supplier management", "ERP integration", "Fiscal compliance", "Real-time analytics"].map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-white/70">
-                    <span className="w-1.5 h-1.5 rounded-full bg-violet-400" />
-                    {item}
+                {t.elOs.features.map((item) => (
+                  <li key={item.en} className="flex items-center gap-3 text-white/70">
+                    <span className="w-1.5 h-1.5 rounded-full bg-violet-400 flex-shrink-0" />
+                    {item[lang]}
                   </li>
                 ))}
               </ul>
-              <Link
-                href="https://el-os.cloud"
-                target="_blank"
-                className="inline-flex items-center gap-2 text-violet-400 hover:text-violet-300 font-medium transition-colors"
-              >
-                Visit EL-OS
+              <Link href="https://el-os.cloud" target="_blank" className="inline-flex items-center gap-2 text-violet-400 hover:text-violet-300 font-medium transition-colors">
+                {t.elOs.cta[lang]}
                 <ArrowUpRight size={18} />
               </Link>
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
               <div className="grid grid-cols-2 gap-3">
-                <FeatureCard icon={Package} title="Wholesale Ordering" desc="Streamlined B2B ordering from your supplier network" color="violet" />
-                <FeatureCard icon={Users} title="Vendor Management" desc="Track suppliers, invoices, and payment terms in one place" color="violet" />
-                <FeatureCard icon={Layers} title="ERP Integration" desc="Connect with existing systems for seamless data flow" color="violet" />
-                <FeatureCard icon={FileText} title="Fiscal Reports" desc="Auto-generated compliance reports for Greek tax law" color="violet" />
+                <FeatureCard icon={Package} title={t.elOs.featureCards.wholesale.title[lang]} desc={t.elOs.featureCards.wholesale.desc[lang]} color="violet" />
+                <FeatureCard icon={Users} title={t.elOs.featureCards.vendors.title[lang]} desc={t.elOs.featureCards.vendors.desc[lang]} color="violet" />
+                <FeatureCard icon={Layers} title={t.elOs.featureCards.erp.title[lang]} desc={t.elOs.featureCards.erp.desc[lang]} color="violet" />
+                <FeatureCard icon={FileText} title={t.elOs.featureCards.fiscal.title[lang]} desc={t.elOs.featureCards.fiscal.desc[lang]} color="violet" />
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Ella — Dedicated B2B2C Section */}
+      {/* Ella Dedicated */}
       <section className="py-32 md:py-40 px-8 md:px-16 lg:px-24 bg-slate-950">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
+              initial={{ opacity: 0, x: isRtl ? 30 : -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="text-center lg:text-left"
+              className="text-center lg:text-start"
             >
               <div className="inline-block mb-8">
                 <div className="w-28 h-28 rounded-3xl overflow-hidden border-2 border-emerald-500/30 shadow-lg shadow-emerald-500/20 mx-auto lg:mx-0">
-                  <Image
-                    src="/images/ella_avatar.png"
-                    alt="Ella"
-                    width={112}
-                    height={112}
-                    className="w-full h-full object-cover"
-                  />
+                  <Image src="/images/ella_avatar.png" alt="Ella" width={112} height={112} className="w-full h-full object-cover" />
                 </div>
               </div>
               <p className="text-emerald-400 text-sm font-medium tracking-widest uppercase mb-4">
-                For Your Customers
+                {t.ellaDedicated.badge[lang]}
               </p>
               <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6">
-                Meet Ella — Your Customers&apos; AI Concierge
+                {t.ellaDedicated.title[lang]}
               </h2>
               <p className="text-white/60 text-lg leading-relaxed mb-8">
-                Deploy Ella at your venue and let her handle customer loyalty, personalized
-                recommendations, and 24/7 multilingual support. She gets smarter with every
-                interaction.
+                {t.ellaDedicated.desc[lang]}
               </p>
-              <Link
-                href="https://el-loyal.com"
-                target="_blank"
-                className="btn-primary text-sm py-3 px-6"
-              >
-                See Ella in Action
+              <Link href="https://el-loyal.com" target="_blank" className="btn-primary text-sm py-3 px-6">
+                {t.ellaDedicated.cta[lang]}
                 <ArrowUpRight size={16} />
               </Link>
             </motion.div>
             <motion.div {...fadeIn}>
               <div className="space-y-4">
-                {[
-                  { icon: Heart, title: "Remembers Every Customer", desc: "Names, preferences, allergies, favorite table — Ella never forgets." },
-                  { icon: Trophy, title: "Handles Loyalty Automatically", desc: "Points, tiers, rewards, and challenges — all managed without staff effort." },
-                  { icon: Globe, title: "Speaks Their Language", desc: "Full conversations in Greek, English, and Arabic — perfect for tourism." },
-                  { icon: Bell, title: "Proactive Recommendations", desc: "Suggests dishes, reminds about offers, and follows up after visits." },
-                ].map((item) => (
-                  <div
-                    key={item.title}
-                    className="flex gap-4 p-4 rounded-xl bg-white/5 border border-emerald-500/10 hover:bg-white/[0.07] transition-colors"
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
-                      <item.icon className="w-5 h-5 text-emerald-400" />
+                {t.ellaDedicated.features.map((item, i) => {
+                  const icons = [Heart, Trophy, Globe, Bell]
+                  const Icon = icons[i]
+                  return (
+                    <div key={item.title.en} className="flex gap-4 p-4 rounded-xl bg-white/5 border border-emerald-500/10 hover:bg-white/[0.07] transition-colors">
+                      <div className="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
+                        <Icon className="w-5 h-5 text-emerald-400" />
+                      </div>
+                      <div>
+                        <p className="text-white font-medium text-sm mb-1">{item.title[lang]}</p>
+                        <p className="text-white/50 text-xs leading-relaxed">{item.desc[lang]}</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-white font-medium text-sm mb-1">{item.title}</p>
-                      <p className="text-white/50 text-xs leading-relaxed">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* EveY — Dedicated B2C Section */}
+      {/* EveY Dedicated */}
       <section className="py-32 md:py-40 px-8 md:px-16 lg:px-24 bg-slate-900/50">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <motion.div {...fadeIn} className="order-2 lg:order-1">
               <div className="space-y-4">
-                {[
-                  { icon: Brain, title: "Remembers Everything", desc: "Your preferences, routines, contacts — EveY builds a picture of you over time." },
-                  { icon: Zap, title: "Proactive Follow-ups", desc: "She doesn't wait to be asked. She reminds, checks in, and closes the loop." },
-                  { icon: Newspaper, title: "News & Updates", desc: "Curated news, weather, and trends filtered just for you — no noise." },
-                  { icon: Sparkles, title: "Challenges You", desc: "She won't just say yes. If something's off, she'll tell you — honestly." },
-                ].map((item) => (
-                  <div
-                    key={item.title}
-                    className="flex gap-4 p-4 rounded-xl bg-white/5 border border-fuchsia-500/10 hover:bg-white/[0.07] transition-colors"
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-fuchsia-500/10 flex items-center justify-center flex-shrink-0">
-                      <item.icon className="w-5 h-5 text-fuchsia-400" />
+                {t.eveyDedicated.features.map((item, i) => {
+                  const icons = [Brain, Zap, Newspaper, Sparkles]
+                  const Icon = icons[i]
+                  return (
+                    <div key={item.title.en} className="flex gap-4 p-4 rounded-xl bg-white/5 border border-fuchsia-500/10 hover:bg-white/[0.07] transition-colors">
+                      <div className="w-10 h-10 rounded-lg bg-fuchsia-500/10 flex items-center justify-center flex-shrink-0">
+                        <Icon className="w-5 h-5 text-fuchsia-400" />
+                      </div>
+                      <div>
+                        <p className="text-white font-medium text-sm mb-1">{item.title[lang]}</p>
+                        <p className="text-white/50 text-xs leading-relaxed">{item.desc[lang]}</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-white font-medium text-sm mb-1">{item.title}</p>
-                      <p className="text-white/50 text-xs leading-relaxed">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             </motion.div>
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
+              initial={{ opacity: 0, x: isRtl ? -30 : 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="text-center lg:text-left order-1 lg:order-2"
+              className="text-center lg:text-start order-1 lg:order-2"
             >
               <div className="inline-block mb-8">
                 <div className="w-28 h-28 rounded-3xl overflow-hidden border-2 border-fuchsia-500/30 shadow-lg shadow-fuchsia-500/20 mx-auto lg:mx-0">
-                  <Image
-                    src="/evey-avatar.png"
-                    alt="EveY"
-                    width={112}
-                    height={112}
-                    className="w-full h-full object-cover"
-                  />
+                  <Image src="/evey-avatar.png" alt="EveY" width={112} height={112} className="w-full h-full object-cover" />
                 </div>
               </div>
               <p className="text-fuchsia-400 text-sm font-medium tracking-widest uppercase mb-4">
-                For You, Personally
+                {t.eveyDedicated.badge[lang]}
               </p>
               <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6">
-                Meet EveY — Your Personal AI
+                {t.eveyDedicated.title[lang]}
               </h2>
               <p className="text-white/60 text-lg leading-relaxed mb-8">
-                Not a chatbot. A concierge. EveY is your personal AI assistant that
-                remembers everything, manages your day, and grows smarter the more
-                you talk to her. Available on Telegram.
+                {t.eveyDedicated.desc[lang]}
               </p>
-              <Link
-                href="/evey"
-                className="inline-flex items-center justify-center gap-3 px-6 py-3 bg-fuchsia-500 hover:bg-fuchsia-400 text-white font-semibold rounded-full transition-all duration-300 hover:scale-105"
-              >
-                Try EveY Free
+              <Link href="/evey" className="inline-flex items-center justify-center gap-3 px-6 py-3 bg-fuchsia-500 hover:bg-fuchsia-400 text-white font-semibold rounded-full transition-all duration-300 hover:scale-105">
+                {t.eveyDedicated.cta[lang]}
                 <ArrowRight size={16} />
               </Link>
             </motion.div>
@@ -448,32 +398,27 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Portfolio / Extratzis */}
+      {/* Portfolio */}
       <section className="py-24 px-8 md:px-16 lg:px-24 bg-slate-950">
         <div className="max-w-6xl mx-auto">
           <motion.div {...fadeIn} className="text-center mb-12">
             <p className="text-white/40 text-sm font-medium tracking-widest uppercase mb-4">
-              Our Portfolio
+              {t.portfolio.badge[lang]}
             </p>
             <h2 className="text-2xl md:text-3xl font-semibold text-white">
-              Projects by EL VALUE
+              {t.portfolio.title[lang]}
             </h2>
           </motion.div>
           <motion.div {...fadeIn} className="flex flex-wrap justify-center gap-6">
-            <a
-              href="https://extratzis.gr"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-4 p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-amber-500/30 hover:bg-white/[0.07] transition-all"
-            >
+            <a href="https://extratzis.gr" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-amber-500/30 hover:bg-white/[0.07] transition-all">
               <div className="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center">
                 <ExternalLink className="w-6 h-6 text-amber-400" />
               </div>
               <div>
                 <p className="text-white font-semibold group-hover:text-amber-400 transition-colors">Extratzis.gr</p>
-                <p className="text-white/50 text-sm">Job Platform — Find Work Across All Sectors</p>
+                <p className="text-white/50 text-sm">{t.portfolio.extratzis[lang]}</p>
               </div>
-              <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-amber-400 transition-colors ml-4" />
+              <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-amber-400 transition-colors ms-4" />
             </a>
           </motion.div>
         </div>
@@ -484,12 +429,12 @@ export default function Home() {
         <div className="max-w-5xl mx-auto">
           <motion.div {...fadeIn} className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
             {[
-              { value: "450+", label: "Venues" },
-              { value: "2M+", label: "Transactions" },
-              { value: "99.9%", label: "Uptime" },
-              { value: "24/7", label: "AI Support" },
+              { value: "450+", label: t.stats.venues[lang] },
+              { value: "2M+", label: t.stats.transactions[lang] },
+              { value: "99.9%", label: t.stats.uptime[lang] },
+              { value: "24/7", label: t.stats.aiSupport[lang] },
             ].map((stat) => (
-              <div key={stat.label} className="text-center">
+              <div key={stat.value} className="text-center">
                 <p className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.value}</p>
                 <p className="text-white/40 text-sm">{stat.label}</p>
               </div>
@@ -503,40 +448,31 @@ export default function Home() {
         <div className="max-w-3xl mx-auto text-center">
           <motion.div {...fadeIn}>
             <h2 className="text-3xl md:text-5xl font-semibold text-white mb-6">
-              Ready to Transform Your Business?
+              {t.cta.title[lang]}
             </h2>
             <p className="text-white/60 text-lg mb-10 max-w-xl mx-auto">
-              Join hundreds of venues already using EL VALUE to streamline operations
-              and delight customers.
+              {t.cta.subtitle[lang]}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-semibold rounded-full transition-all duration-300 hover:scale-105"
-              >
-                Get Started
+              <Link href="/contact" className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-semibold rounded-full transition-all duration-300 hover:scale-105">
+                {t.cta.button[lang]}
                 <ArrowRight size={18} />
               </Link>
-              <a
-                href={VIVA_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 border border-white/20 hover:border-amber-500/40 text-white font-medium rounded-full transition-all duration-300 hover:text-amber-400"
-              >
-                Open Viva Account
+              <a href={VIVA_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-3 px-8 py-4 border border-white/20 hover:border-amber-500/40 text-white font-medium rounded-full transition-all duration-300 hover:text-amber-400">
+                {t.cta.viva[lang]}
                 <ArrowUpRight size={16} />
               </a>
             </div>
             <div className="mt-12 flex flex-wrap justify-center gap-6 text-white/30 text-sm">
-              <span>GDPR Compliant</span>
+              <span>{t.cta.badges.gdpr[lang]}</span>
               <span>&middot;</span>
-              <span>EU Data Centers</span>
+              <span>{t.cta.badges.eu[lang]}</span>
               <span>&middot;</span>
-              <span>99.9% Uptime SLA</span>
+              <span>{t.cta.badges.sla[lang]}</span>
             </div>
           </motion.div>
         </div>
       </section>
-    </>
+    </div>
   )
 }
