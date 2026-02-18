@@ -8,7 +8,7 @@ const products = [
   { name: "RSRV", href: "https://el-rsrv.com", description: "Reservations" },
   { name: "EL-POS", href: "/products#el-pos", description: "POS System" },
   { name: "EveY", href: "/evey", description: "Personal AI" },
-  { name: "Extratzis", href: "https://extratzis.gr", description: "Digital Menu" },
+  { name: "Extratzis", href: "https://extratzis.gr", description: "Job Platform" },
 ]
 
 const company = [

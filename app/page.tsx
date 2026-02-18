@@ -471,7 +471,7 @@ export default function Home() {
               </div>
               <div>
                 <p className="text-white font-semibold group-hover:text-amber-400 transition-colors">Extratzis.gr</p>
-                <p className="text-white/50 text-sm">Digital Menu & Ordering Platform</p>
+                <p className="text-white/50 text-sm">Job Platform — Find Work Across All Sectors</p>
               </div>
               <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-amber-400 transition-colors ml-4" />
             </a>
