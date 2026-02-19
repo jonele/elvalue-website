@@ -345,7 +345,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* EveY Dedicated */}
+      {/* EvE Dedicated */}
       <section className="py-32 md:py-40 px-8 md:px-16 lg:px-24 bg-slate-900/50">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
@@ -377,7 +377,7 @@ export default function Home() {
             >
               <div className="inline-block mb-8">
                 <div className="w-28 h-28 rounded-3xl overflow-hidden border-2 border-fuchsia-500/30 shadow-lg shadow-fuchsia-500/20 mx-auto lg:mx-0">
-                  <Image src="/evey-avatar.png" alt="EveY" width={112} height={112} className="w-full h-full object-cover" />
+                  <Image src="/evey-avatar.png" alt="EvE" width={112} height={112} className="w-full h-full object-cover" />
                 </div>
               </div>
               <p className="text-fuchsia-400 text-sm font-medium tracking-widest uppercase mb-4">

@@ -22,7 +22,7 @@ const PRODUCTS = [
   { value: "el-loyal", label: "EL-Loyal (Loyalty)" },
   { value: "rsrv", label: "RSRV (Reservations)" },
   { value: "el-pos", label: "EL-POS (Point of Sale)" },
-  { value: "evey", label: "EveY (AI Assistant)" },
+  { value: "evey", label: "EvE (AI Assistant)" },
 ]
 
 function ContactForm() {

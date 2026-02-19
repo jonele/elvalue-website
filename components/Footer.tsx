@@ -7,7 +7,7 @@ const products = [
   { name: "EL-Loyal", href: "https://el-loyal.com", description: "Loyalty Platform" },
   { name: "RSRV", href: "https://el-rsrv.com", description: "Reservations" },
   { name: "EL-POS", href: "/products#el-pos", description: "POS System" },
-  { name: "EveY", href: "/evey", description: "Personal AI" },
+  { name: "EvE", href: "/evey", description: "Personal AI" },
   { name: "Extratzis", href: "https://extratzis.gr", description: "Job Platform" },
   { name: "NextGenCalls", href: "https://nextgencalls.gr", description: "AI Call Agent" },
 ]

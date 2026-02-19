@@ -177,7 +177,7 @@ export default function EveyPage() {
             <div className="relative w-28 h-28 md:w-36 md:h-36 mx-auto mb-8">
               <Image
                 src="/evey-avatar.png"
-                alt="EveY"
+                alt="EvE"
                 fill
                 className="rounded-full object-cover ring-2 ring-fuchsia-500/50 shadow-[0_0_40px_rgba(192,38,211,0.3)]"
                 priority
@@ -195,7 +195,7 @@ export default function EveyPage() {
             </p>
 
             <h1 className="text-7xl md:text-9xl lg:text-[10rem] font-bold text-white leading-[0.95] mb-6 tracking-tight">
-              EveY
+              EvE
             </h1>
 
             <p className="text-lg md:text-xl text-white/60 max-w-xl mx-auto mb-14 leading-relaxed">
@@ -221,7 +221,7 @@ export default function EveyPage() {
       <section className="py-28 md:py-40 bg-slate-950">
         <Container wide>
           <motion.div {...fadeIn} className="text-center mb-16 md:mb-20">
-            <p className="text-fuchsia-400 text-sm font-medium tracking-widest uppercase mb-4">EveY AI</p>
+            <p className="text-fuchsia-400 text-sm font-medium tracking-widest uppercase mb-4">EvE AI</p>
             <h2 className="text-3xl md:text-5xl font-semibold text-white mb-4">{t.features.title[lang]}</h2>
             <p className="text-white/50 text-lg">{t.features.subtitle[lang]}</p>
           </motion.div>
@@ -250,7 +250,7 @@ export default function EveyPage() {
         </Container>
       </section>
 
-      {/* ═══ Comparison — Why EveY ═══ */}
+      {/* ═══ Comparison — Why EvE ═══ */}
       <section className="py-28 md:py-40 bg-slate-900/50">
         <Container wide>
           <motion.div {...fadeIn} className="text-center mb-16 md:mb-20">
@@ -279,7 +279,7 @@ export default function EveyPage() {
               </ul>
             </motion.div>
 
-            {/* EveY */}
+            {/* EvE */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -288,7 +288,7 @@ export default function EveyPage() {
               className="min-w-0 p-6 sm:p-8 rounded-2xl border-2 border-fuchsia-500/40 bg-fuchsia-500/[0.04] relative"
             >
               <div className="absolute -top-5 left-1/2 -translate-x-1/2">
-                <Image src="/evey-avatar.png" alt="EveY" width={40} height={40} className="rounded-full ring-2 ring-fuchsia-500 shadow-[0_0_20px_rgba(192,38,211,0.4)]" />
+                <Image src="/evey-avatar.png" alt="EvE" width={40} height={40} className="rounded-full ring-2 ring-fuchsia-500 shadow-[0_0_20px_rgba(192,38,211,0.4)]" />
               </div>
               <h3 className="text-lg font-semibold text-white mb-2 mt-4">{t.comparison.evey.title[lang]}</h3>
               <p className="text-fuchsia-400 text-sm mb-6">
@@ -465,7 +465,7 @@ export default function EveyPage() {
               >
                 {tier.highlighted && (
                   <div className="absolute -top-5 left-1/2 -translate-x-1/2 flex items-center gap-2">
-                    <Image src="/evey-avatar.png" alt="EveY" width={32} height={32} className="rounded-full ring-2 ring-fuchsia-500 shadow-[0_0_16px_rgba(192,38,211,0.4)]" />
+                    <Image src="/evey-avatar.png" alt="EvE" width={32} height={32} className="rounded-full ring-2 ring-fuchsia-500 shadow-[0_0_16px_rgba(192,38,211,0.4)]" />
                     <span className="px-3 py-1 bg-gradient-to-r from-fuchsia-500 to-violet-500 rounded-full text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5 whitespace-nowrap">
                       <Crown size={12} />
                       {lang === "el" ? "Δημοφιλές" : "Popular"}
@@ -517,7 +517,7 @@ export default function EveyPage() {
           <div className="text-center">
             <motion.div {...fadeIn}>
               <div className="relative w-20 h-20 mx-auto mb-8">
-                <Image src="/evey-avatar.png" alt="EveY" fill className="rounded-full object-cover ring-2 ring-fuchsia-500/50 shadow-[0_0_30px_rgba(192,38,211,0.3)]" />
+                <Image src="/evey-avatar.png" alt="EvE" fill className="rounded-full object-cover ring-2 ring-fuchsia-500/50 shadow-[0_0_30px_rgba(192,38,211,0.3)]" />
                 <span className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-400 border-2 border-slate-950 animate-pulse" />
               </div>
               <h2 className="text-3xl md:text-5xl font-semibold text-white mb-6">{t.finalCta.title[lang]}</h2>

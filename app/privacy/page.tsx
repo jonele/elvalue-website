@@ -103,7 +103,7 @@ export default function PrivacyPage() {
                 </li>
                 <li>
                   <span className="text-white font-medium">AI conversation data</span>{" "}
-                  — messages exchanged with EveY, our AI assistant, to improve service quality
+                  — messages exchanged with EvE, our AI assistant, to improve service quality
                 </li>
               </ul>
             </Section>
@@ -185,7 +185,7 @@ export default function PrivacyPage() {
                 </div>
                 <div className="p-4 rounded-xl bg-white/5 border border-white/10">
                   <p className="text-white font-medium">Telegram</p>
-                  <p className="text-sm">Messaging platform used for EveY AI assistant interactions.</p>
+                  <p className="text-sm">Messaging platform used for EvE AI assistant interactions.</p>
                 </div>
                 <div className="p-4 rounded-xl bg-white/5 border border-white/10">
                   <p className="text-white font-medium">Vercel</p>

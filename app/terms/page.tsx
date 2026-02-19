@@ -18,7 +18,7 @@ const sections = [
       "RSRV — A reservation and table management system",
       "EL-OS — A B2B procurement and supplier portal for hospitality businesses",
       "EL-POS — A point-of-sale system with kitchen display and cashier functionality",
-      "EveY — An AI personal assistant for hospitality business owners and managers",
+      "EvE — An AI personal assistant for hospitality business owners and managers",
     ],
     after:
       "We reserve the right to modify, suspend, or discontinue any part of our services at any time, with reasonable notice where practicable. We shall not be liable to you or any third party for any modification, suspension, or discontinuation of services.",

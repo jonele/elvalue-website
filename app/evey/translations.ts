@@ -21,8 +21,8 @@ export const t = {
   },
   features: {
     title: {
-      el: "Τι Κάνει η EveY",
-      en: "What EveY Does",
+      el: "Τι Κάνει η EvE",
+      en: "What EvE Does",
     },
     subtitle: {
       el: "Δεν είναι chatbot. Είναι concierge.",
@@ -32,8 +32,8 @@ export const t = {
       {
         title: { el: "Θυμάται Τα Πάντα", en: "Remembers Everything" },
         desc: {
-          el: "Ονόματα, προτιμήσεις, ρουτίνες, inside jokes. Η EveY χτίζει σιγά σιγά μια εικόνα για σένα.",
-          en: "Names, preferences, routines, inside jokes. EveY gradually builds a picture of who you are.",
+          el: "Ονόματα, προτιμήσεις, ρουτίνες, inside jokes. Η EvE χτίζει σιγά σιγά μια εικόνα για σένα.",
+          en: "Names, preferences, routines, inside jokes. EvE gradually builds a picture of who you are.",
         },
         icon: "brain",
       },
@@ -65,12 +65,12 @@ export const t = {
   },
   comparison: {
     title: {
-      el: "Γιατί η EveY;",
-      en: "Why EveY?",
+      el: "Γιατί η EvE;",
+      en: "Why EvE?",
     },
     subtitle: {
-      el: "Άλλοι AI βοηθοί ξεκινάνε από €10/μήνα και κάνουν μόνο chat. Η EveY κάνει πολύ περισσότερα.",
-      en: "Other AI assistants start at €10/month and only do chat. EveY does so much more.",
+      el: "Άλλοι AI βοηθοί ξεκινάνε από €10/μήνα και κάνουν μόνο chat. Η EvE κάνει πολύ περισσότερα.",
+      en: "Other AI assistants start at €10/month and only do chat. EvE does so much more.",
     },
     others: {
       title: {
@@ -91,8 +91,8 @@ export const t = {
     },
     evey: {
       title: {
-        el: "EveY",
-        en: "EveY",
+        el: "EvE",
+        en: "EvE",
       },
       items: [
         { el: "Θυμάται ΟΛΑ — ονόματα, προτιμήσεις, συνήθειες", en: "Remembers EVERYTHING — names, preferences, habits" },
@@ -118,8 +118,8 @@ export const t = {
       ],
     },
     eveyAdvantage: {
-      el: "Η EveY είναι available 24/7, κοστίζει κλάσματα, και δεν παίρνει ποτέ άδεια.",
-      en: "EveY is available 24/7, costs a fraction, and never takes a day off.",
+      el: "Η EvE είναι available 24/7, κοστίζει κλάσματα, και δεν παίρνει ποτέ άδεια.",
+      en: "EvE is available 24/7, costs a fraction, and never takes a day off.",
     },
   },
   howItWorks: {
@@ -132,8 +132,8 @@ export const t = {
         step: "1",
         title: { el: "Άνοιξε το Telegram", en: "Open Telegram" },
         desc: {
-          el: "Πάτα το κουμπί και στείλε ένα μήνυμα στην EveY.",
-          en: "Tap the button and send a message to EveY.",
+          el: "Πάτα το κουμπί και στείλε ένα μήνυμα στην EvE.",
+          en: "Tap the button and send a message to EvE.",
         },
       },
       {
@@ -168,7 +168,7 @@ export const t = {
         name: { el: "Δωρεάν", en: "Free" },
         price: { el: "€0", en: "€0" },
         period: { el: "για πάντα", en: "forever" },
-        desc: { el: "Γνώρισε την EveY. Χωρίς δεσμεύσεις.", en: "Meet EveY. No strings attached." },
+        desc: { el: "Γνώρισε την EvE. Χωρίς δεσμεύσεις.", en: "Meet EvE. No strings attached." },
         features: [
           { el: "30 μηνύματα/μέρα", en: "30 messages/day" },
           { el: "Θυμάται τα πάντα για σένα", en: "Remembers everything about you" },
@@ -182,7 +182,7 @@ export const t = {
         name: { el: "Pro", en: "Pro" },
         price: { el: "€29", en: "€29" },
         period: { el: "/μήνα", en: "/month" },
-        desc: { el: "Η EveY γίνεται η προσωπική σου βοηθός.", en: "EveY becomes your personal assistant." },
+        desc: { el: "Η EvE γίνεται η προσωπική σου βοηθός.", en: "EvE becomes your personal assistant." },
         features: [
           { el: "Απεριόριστα μηνύματα", en: "Unlimited messages" },
           { el: "Πιο έξυπνο AI (Claude Sonnet)", en: "Smarter AI (Claude Sonnet)" },
@@ -211,8 +211,8 @@ export const t = {
       },
     ],
     savings: {
-      el: "Ένας προσωπικός βοηθός στην Ελλάδα κοστίζει €800-1.500/μήνα. Η EveY κάνει τα ίδια, 24/7, από €29.",
-      en: "A personal assistant in Greece costs €800-1,500/month. EveY does the same, 24/7, from €29.",
+      el: "Ένας προσωπικός βοηθός στην Ελλάδα κοστίζει €800-1.500/μήνα. Η EvE κάνει τα ίδια, 24/7, από €29.",
+      en: "A personal assistant in Greece costs €800-1,500/month. EvE does the same, 24/7, from €29.",
     },
   },
   addToPhone: {
@@ -221,8 +221,8 @@ export const t = {
       en: "Add Her to Your Phone",
     },
     subtitle: {
-      el: "3 βήματα και η EveY είναι πάντα μαζί σου.",
-      en: "3 steps and EveY is always with you.",
+      el: "3 βήματα και η EvE είναι πάντα μαζί σου.",
+      en: "3 steps and EvE is always with you.",
     },
     steps: [
       {
@@ -236,16 +236,16 @@ export const t = {
       {
         title: { el: "Πάτα «Ξεκίνα Δωρεάν»", en: "Tap «Start Free»" },
         desc: {
-          el: "Θα ανοίξει αυτόματα το Telegram και θα βρεις την EveY.",
-          en: "It will automatically open Telegram and find EveY for you.",
+          el: "Θα ανοίξει αυτόματα το Telegram και θα βρεις την EvE.",
+          en: "It will automatically open Telegram and find EvE for you.",
         },
         icon: "smartphone" as const,
       },
       {
         title: { el: "Πες της «Γεια»", en: "Say «Hi»" },
         desc: {
-          el: "Στείλε ένα μήνυμα και η EveY θα ξεκινήσει να σε γνωρίζει. Τόσο απλά.",
-          en: "Send a message and EveY will start getting to know you. That simple.",
+          el: "Στείλε ένα μήνυμα και η EvE θα ξεκινήσει να σε γνωρίζει. Τόσο απλά.",
+          en: "Send a message and EvE will start getting to know you. That simple.",
         },
         icon: "user" as const,
       },
@@ -276,8 +276,8 @@ export const t = {
   },
   finalCta: {
     title: {
-      el: "Έτοιμος να Γνωρίσεις την EveY;",
-      en: "Ready to Meet EveY?",
+      el: "Έτοιμος να Γνωρίσεις την EvE;",
+      en: "Ready to Meet EvE?",
     },
     subtitle: {
       el: "Ξεκίνα δωρεάν σήμερα. Αναβάθμισε αν & όταν θέλεις.",
