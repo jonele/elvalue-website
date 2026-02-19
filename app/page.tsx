@@ -409,28 +409,93 @@ export default function Home() {
               {t.portfolio.title[lang]}
             </h2>
           </motion.div>
-          <motion.div {...fadeIn} className="flex flex-wrap justify-center gap-6">
-            <a href="https://extratzis.gr" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-amber-500/30 hover:bg-white/[0.07] transition-all">
-              <div className="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center">
-                <ExternalLink className="w-6 h-6 text-amber-400" />
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Extratzis */}
+            <motion.a
+              href="https://extratzis.gr"
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="group block rounded-2xl border border-white/10 hover:border-amber-500/30 bg-white/[0.02] overflow-hidden transition-all hover:shadow-lg hover:shadow-amber-500/5"
+            >
+              {/* Browser chrome */}
+              <div className="flex items-center gap-2 px-4 py-3 bg-white/5 border-b border-white/10">
+                <div className="flex gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-white/10" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-white/10" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-white/10" />
+                </div>
+                <div className="flex-1 mx-4">
+                  <div className="bg-white/5 rounded-md px-3 py-1 text-xs text-white/30 text-center">extratzis.gr</div>
+                </div>
               </div>
-              <div>
-                <p className="text-white font-semibold group-hover:text-amber-400 transition-colors">Extratzis.gr</p>
-                <p className="text-white/50 text-sm">{t.portfolio.extratzis[lang]}</p>
+              {/* Preview area */}
+              <div className="aspect-[16/10] bg-gradient-to-br from-amber-500/10 via-amber-500/5 to-transparent flex items-center justify-center">
+                <div className="text-center px-8">
+                  <div className="w-16 h-16 rounded-2xl bg-amber-500/20 flex items-center justify-center mx-auto mb-4">
+                    <ExternalLink className="w-8 h-8 text-amber-400" />
+                  </div>
+                  <p className="text-white/60 text-sm">extratzis.gr</p>
+                </div>
               </div>
-              <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-amber-400 transition-colors ms-4" />
-            </a>
-            <a href="https://nextgencalls.gr" target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-blue-500/30 hover:bg-white/[0.07] transition-all">
-              <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center">
-                <ExternalLink className="w-6 h-6 text-blue-400" />
+              {/* Info */}
+              <div className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-white font-semibold text-lg group-hover:text-amber-400 transition-colors">Extratzis.gr</p>
+                    <p className="text-white/50 text-sm mt-1">{t.portfolio.extratzis[lang]}</p>
+                  </div>
+                  <ArrowUpRight className="w-5 h-5 text-white/30 group-hover:text-amber-400 transition-colors" />
+                </div>
               </div>
-              <div>
-                <p className="text-white font-semibold group-hover:text-blue-400 transition-colors">NextGenCalls.gr</p>
-                <p className="text-white/50 text-sm">{t.portfolio.nextgencalls[lang]}</p>
+            </motion.a>
+
+            {/* NextGenCalls */}
+            <motion.a
+              href="https://nextgencalls.gr"
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="group block rounded-2xl border border-white/10 hover:border-blue-500/30 bg-white/[0.02] overflow-hidden transition-all hover:shadow-lg hover:shadow-blue-500/5"
+            >
+              {/* Browser chrome */}
+              <div className="flex items-center gap-2 px-4 py-3 bg-white/5 border-b border-white/10">
+                <div className="flex gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-white/10" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-white/10" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-white/10" />
+                </div>
+                <div className="flex-1 mx-4">
+                  <div className="bg-white/5 rounded-md px-3 py-1 text-xs text-white/30 text-center">nextgencalls.gr</div>
+                </div>
               </div>
-              <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-blue-400 transition-colors ms-4" />
-            </a>
-          </motion.div>
+              {/* Preview area */}
+              <div className="aspect-[16/10] bg-gradient-to-br from-blue-500/10 via-blue-500/5 to-transparent flex items-center justify-center">
+                <div className="text-center px-8">
+                  <div className="w-16 h-16 rounded-2xl bg-blue-500/20 flex items-center justify-center mx-auto mb-4">
+                    <ExternalLink className="w-8 h-8 text-blue-400" />
+                  </div>
+                  <p className="text-white/60 text-sm">nextgencalls.gr</p>
+                </div>
+              </div>
+              {/* Info */}
+              <div className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-white font-semibold text-lg group-hover:text-blue-400 transition-colors">NextGenCalls.gr</p>
+                    <p className="text-white/50 text-sm mt-1">{t.portfolio.nextgencalls[lang]}</p>
+                  </div>
+                  <ArrowUpRight className="w-5 h-5 text-white/30 group-hover:text-blue-400 transition-colors" />
+                </div>
+              </div>
+            </motion.a>
+          </div>
         </div>
       </section>
 
