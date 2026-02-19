@@ -10,7 +10,7 @@ import {
 } from "lucide-react"
 import { t, type Lang } from "./translations"
 
-const CTA_URL = "https://comms.elvalue.com"
+const CTA_URL = "/evey/start"
 
 const fadeIn = {
   initial: { opacity: 0, y: 30 },
@@ -204,7 +204,6 @@ export default function EveyPage() {
 
             <Link
               href={CTA_URL}
-              target="_blank"
               className="glow-btn inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-fuchsia-500 to-violet-500 hover:from-fuchsia-400 hover:to-violet-400 text-white font-semibold rounded-full transition-all duration-300 hover:scale-105 text-lg"
             >
               <Send size={20} />
@@ -428,7 +427,6 @@ export default function EveyPage() {
           <motion.div {...fadeIn} className="text-center">
             <Link
               href={CTA_URL}
-              target="_blank"
               className="glow-btn inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-fuchsia-500 to-violet-500 hover:from-fuchsia-400 hover:to-violet-400 text-white font-semibold rounded-full transition-all duration-300 hover:scale-105 text-lg"
             >
               <Send size={20} />
@@ -491,7 +489,6 @@ export default function EveyPage() {
 
                 <Link
                   href={CTA_URL}
-                  target="_blank"
                   className={`w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full font-semibold transition-all duration-300 text-sm ${
                     tier.highlighted
                       ? "glow-btn bg-gradient-to-r from-fuchsia-500 to-violet-500 hover:from-fuchsia-400 hover:to-violet-400 text-white hover:scale-105"
@@ -524,7 +521,6 @@ export default function EveyPage() {
               <p className="text-white/50 text-lg mb-10">{t.finalCta.subtitle[lang]}</p>
               <Link
                 href={CTA_URL}
-                target="_blank"
                 className="glow-btn inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-fuchsia-500 to-violet-500 hover:from-fuchsia-400 hover:to-violet-400 text-white font-semibold rounded-full transition-all duration-300 hover:scale-105 text-lg"
               >
                 {t.finalCta.cta[lang]}
