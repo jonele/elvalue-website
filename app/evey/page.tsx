@@ -527,10 +527,13 @@ export default function EveyPage() {
                 <ArrowRight size={18} />
               </Link>
 
-              <div className="mt-12 flex items-center justify-center gap-2 text-white/30 text-sm">
+              <Link
+                href="/evey/privacy"
+                className="mt-12 inline-flex items-center justify-center gap-2 text-white/30 hover:text-emerald-400 text-sm transition-colors"
+              >
                 <Shield size={14} />
                 <span>{t.footer.privacy[lang]}</span>
-              </div>
+              </Link>
             </motion.div>
           </div>
         </Container>
